@@ -12,22 +12,20 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "curvepoint")
 public class CurvePoint {
-    // TODO: Map columns in data table CURVEPOINT with corresponding java OK
+    // TODO: Map columns in data table CURVEPOINT with corresponding java fields
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotNull(message = "must not be null")
-    private Integer curveId;
-    @Column(name = "as_of_date")
-    private Timestamp asOfDate;
-    @DecimalMin(value = "0.00", inclusive = false, message = "Must be greater than 0")
-    private double term;
-    @DecimalMin(value = "0.00", inclusive = false, message = "Must be greater than 0")
-    private double value;
-    @Column(name = "creation_date")
-    private Timestamp creationDate;
+    Integer id;
+    @NotNull
+    Integer curveId;
+    Timestamp asOfDate;
+    Double term;
+    Double value;
+    Timestamp creationDate;
 
     public CurvePoint(Integer curveId, Double term, Double value) {
+        super();
         this.curveId = curveId;
         this.term = term;
         this.value = value;

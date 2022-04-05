@@ -9,49 +9,44 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "trade")
 public class Trade {
-    // TODO: Map columns in data table TRADE with corresponding java fields ==> OK
+    // TODO: Map columns in data table TRADE with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "trade_id")
-    private Integer tradeId;
-    private String account;
-    private String type;
-    @Column(name = "buy_quantity")
-    @DecimalMin(value = "0.00", inclusive = false, message = "Doit être suppérieur à 0")
-    private Double buyQuantity;
-    @Column(name = "sell_quantity")
-    private Double sellQuantity;
-    @Column(name = "sell_price")
-    private Double sellPrice;
-    private String benchmark;
-    @Column(name = "trade_date")
-    private Timestamp tradeDate;
-    private String security;
-    private String status;
-    private String trader;
-    private String book;
-    @Column(name = "creation_date")
-    private Timestamp creationDate;
-    @Column(name = "revision_name")
-    private String revisionName;
-    @Column(name = "revision_date")
-    private Timestamp revisionDate;
-    @Column(name = "deal_name")
-    private String dealName;
-    @Column(name = "deal_type")
-    private String dealType;
-    @Column(name = "source_list_id")
-    private String sourceListId;
-    private String side;
+    Integer tradeId;
+    @NotBlank(message ="Account is mandatory")
+    String account;
+    @NotBlank(message ="Type is mandatory")
+    String type;
+    Double buyQuantity;
+    Double sellQuantity;
+    Double buyPrice;
+    Double sellPrice;
+    String benchmark;
+    Timestamp tradeDate;
+    String security;
+    String status;
+    String trader;
+    String book;
+    String creationName;
+    Timestamp creationDate;
+    String revisionName;
+    Timestamp revisionDate;
+    String dealName;
+    String dealType;
+    String sourceListId;
+    String side;
 
-    public Trade() {
-        super();
-    }
 
-    public Trade(String account, String type) {
+
+    public Trade(String account, String type, double buyQuantity) {
         super();
         this.account = account;
         this.type = type;
+        this.buyQuantity = buyQuantity;
+    }
+
+    public Trade() {
+        super();
     }
 
     public Integer getTradeId() {
@@ -92,6 +87,14 @@ public class Trade {
 
     public void setSellQuantity(Double sellQuantity) {
         this.sellQuantity = sellQuantity;
+    }
+
+    public Double getBuyPrice() {
+        return buyPrice;
+    }
+
+    public void setBuyPrice(Double buyPrice) {
+        this.buyPrice = buyPrice;
     }
 
     public Double getSellPrice() {
@@ -148,6 +151,14 @@ public class Trade {
 
     public void setBook(String book) {
         this.book = book;
+    }
+
+    public String getCreationName() {
+        return creationName;
+    }
+
+    public void setCreationName(String creationName) {
+        this.creationName = creationName;
     }
 
     public Timestamp getCreationDate() {
