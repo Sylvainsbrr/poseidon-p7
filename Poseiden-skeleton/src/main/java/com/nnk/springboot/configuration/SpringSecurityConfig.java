@@ -23,9 +23,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/bidList/**", "/admin/*", "/user/**", "/trade/**", "/ruleName/**", "/rating/**",
+                .antMatchers("/bidList/**", "/admin/*", "/trade/**", "/ruleName/**", "/rating/**",
                         "/curvePoint/**")
-                .hasAnyAuthority("ADMIN")
+                .hasAnyAuthority()
                 .antMatchers("/", "/login").hasAuthority("USER")
                 .and().formLogin()
                 .defaultSuccessUrl("/bidList/list").and().logout().logoutUrl("/app-logout").logoutSuccessUrl("/").and()
