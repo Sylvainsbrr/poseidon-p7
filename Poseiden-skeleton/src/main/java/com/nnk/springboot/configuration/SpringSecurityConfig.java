@@ -23,14 +23,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/bidList/**", "/admin/*", "/trade/**", "/ruleName/**", "/rating/**",
+                .antMatchers("/bidList/**", "/admin/*", "/user/**", "/trade/**", "/ruleName/**", "/rating/**",
                         "/curvePoint/**")
-                .hasAnyAuthority()
+                .authenticated()
                 .antMatchers("/", "/login").hasAuthority("USER")
-                .and().formLogin()
+                .and().formLogin().and().oauth2Login()
                 .defaultSuccessUrl("/bidList/list").and().logout().logoutUrl("/app-logout").logoutSuccessUrl("/").and()
                 .exceptionHandling().accessDeniedPage("/403");
-        // Contrainte project session max : 1
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).maximumSessions(1);
     }
 
@@ -46,5 +45,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
+
 
 }

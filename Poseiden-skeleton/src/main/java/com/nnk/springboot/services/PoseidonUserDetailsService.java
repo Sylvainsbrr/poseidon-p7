@@ -28,7 +28,4 @@ public class PoseidonUserDetailsService implements UserDetailsService {
         return userDetails;
     }
 
-
-
-
 }
