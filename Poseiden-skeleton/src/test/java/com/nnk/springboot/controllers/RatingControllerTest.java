@@ -24,12 +24,6 @@ public class RatingControllerTest {
     @Autowired
     private RatingRepository ratingRepository;
 
-    @WithMockUser(authorities = "USER")
-    @Test
-    public void showRatingListTest() throws Exception {
-        mockMvc.perform(get("/bidList/list")).andExpect(status().isForbidden());
-    }
-
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void showRatingTestAdmin() throws Exception {

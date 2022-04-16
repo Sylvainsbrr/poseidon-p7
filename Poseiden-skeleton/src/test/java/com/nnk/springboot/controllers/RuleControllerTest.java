@@ -21,12 +21,6 @@ public class RuleControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @WithMockUser(authorities = "USER")
-    @Test
-    public void showRuleTest() throws Exception {
-        mockMvc.perform(get("/ruleName/list")).andExpect(status().isForbidden());
-    }
-
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void showRuleTestAdmin() throws Exception {

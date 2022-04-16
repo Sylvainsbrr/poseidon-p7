@@ -25,12 +25,6 @@ public class BidListControllerTest {
     @Autowired
     BidListRepository bidListRepository;
 
-    @WithMockUser(authorities = "USER")
-    @Test
-    public void showBidListTest() throws Exception {
-        mockMvc.perform(get("/rating/list")).andExpect(status().isForbidden());
-    }
-
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void showBidListTestAdmin() throws Exception {

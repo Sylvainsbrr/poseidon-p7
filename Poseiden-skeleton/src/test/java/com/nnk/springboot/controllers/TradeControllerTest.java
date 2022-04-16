@@ -25,12 +25,6 @@ public class TradeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @WithMockUser(authorities = "USER")
-    @Test
-    public void showTradeTest() throws Exception {
-        mockMvc.perform(get("/trade/list")).andExpect(status().isForbidden());
-    }
-
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void showTradeTestAdmin() throws Exception {

@@ -26,12 +26,6 @@ public class CurvePointControllerTest {
     @Autowired
     CurvePointRepository curvePointRepository;
 
-    @WithMockUser(authorities = "USER")
-    @Test
-    public void showCurpointList() throws Exception {
-        mockMvc.perform(get("/curvePoint/list")).andExpect(status().isForbidden());
-    }
-
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void showCurpointTestAdmin() throws Exception {
