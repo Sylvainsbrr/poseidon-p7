@@ -32,13 +32,13 @@ public class CurveController {
 
     @GetMapping("/curvePoint/add")
     public String addBidForm(CurvePoint bid) {
-        logger.info("methode addBidForm curvePOint");
+        logger.info("methode addBidForm curvePoint");
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        logger.info("methode validate curvePOint");
+        logger.info("methode validate curvePoint");
         // TODO: check data valid and save to db, after saving return Curve list
         if (!result.hasErrors()) {
             curvePointRepository.save(curvePoint);
@@ -50,7 +50,7 @@ public class CurveController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        logger.info("methode sHowUpdateForm curvePOint");
+        logger.info("methode sHowUpdateForm curvePoint");
         // TODO: get CurvePoint by Id and to model then show to the form
         CurvePoint curve = curvePointRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid curve Id:" + id));
@@ -61,19 +61,20 @@ public class CurveController {
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                             BindingResult result, Model model) {
-        logger.info("methode updateBid curvePOint");
+        // TODO: check required fields, if valid call service to update Curve and return Curve list
+        logger.info("methode updateBid curvePoint");
         if (result.hasErrors()) {
             return "curvePoint/update";
         }
         curvePoint.setCurveId(id);
         curvePointRepository.save(curvePoint);
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
+
         return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        logger.info("methode deleteBid curvePOint");
+        logger.info("methode deleteBid curvePoint");
         CurvePoint curve = curvePointRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid curve Id:" + id));
         curvePointRepository.delete(curve);

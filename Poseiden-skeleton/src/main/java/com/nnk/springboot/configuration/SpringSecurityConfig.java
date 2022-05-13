@@ -26,7 +26,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/bidList/**", "/trade/**", "/ruleName/**", "/rating/**", "/curvePoint/**")
                 .authenticated()
                 .antMatchers( "/admin/**", "/user/**").hasAuthority("ADMIN")
-                .and().formLogin().defaultSuccessUrl("/bidList/list").and().oauth2Login()
+                .and().formLogin().and().oauth2Login()
                 .defaultSuccessUrl("/bidList/list").and().logout().logoutUrl("/app-logout").logoutSuccessUrl("/login").and()
                 .exceptionHandling().accessDeniedPage("/403");
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).maximumSessions(1);

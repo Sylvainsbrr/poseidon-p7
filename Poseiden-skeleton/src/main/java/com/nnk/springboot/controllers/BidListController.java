@@ -77,7 +77,7 @@ public class BidListController {
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, BindingResult result, Model model) {
         logger.info("methode updateBid bidList");
         // TODO: check required fields, if valid call service to update Bid and return
-        // validation front; on ne fait jamais confiance a lutilisateur
+        // validation front; on vérifie toujours ce que renvoie lutilisateur !
         if (result.hasErrors()) {
             return "bidList/update";
         }
