@@ -2,9 +2,11 @@ package com.nnk.springboot.controllers;
 
 import javax.validation.Valid;
 
+import com.nnk.springboot.utils.AuthUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
+
+import java.security.Principal;
+
 @Controller
 public class CurveController {
     // TODO: Inject Curve Point service
@@ -24,8 +29,12 @@ public class CurveController {
     private CurvePointRepository curvePointRepository;
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model){
+    public String home(Model model,@AuthenticationPrincipal Principal principal){
         logger.info("methode home curvePOint");
+        String oauth2User = AuthUtils.getOAuth2User(principal);
+        if(oauth2User != null){
+            model.addAttribute("userName",oauth2User);
+        }
         model.addAttribute("curvePoint",curvePointRepository.findAll());
         return "curvePoint/list";
     }
